@@ -1,53 +1,45 @@
-# Regenerative Agro Platform (proyecto "insumos")
+# Regenerative Agro Platform 🌱
 
-Catálogo web en PHP + MySQL de fabricantes e insumos biológicos para agricultura regenerativa. Incluye fichas de producto con gráfico radar de microorganismos, blog de noticias, formulario de contacto y soporte multi-idioma con URLs amigables (`/es/`, `/en/`, `/pt/`, `/fr/`, `/ca/`).
+Plataforma web dinámica desarrollada en **PHP nativo y MariaDB/MySQL** diseñada para conectar fabricantes, distribuidores y agricultores en el sector de la **agricultura regenerativa**, facilitando la catalogación de insumos agrícolas sostenibles y la gestión de suscripciones comerciales.
 
-## Características
+---
 
-- Listado de fabricantes con filtro por tipo de registro y contador de productos.
-- Ficha de fabricante y ficha de producto, con relación a microorganismos (gráfico radar vía Chart.js).
-- Blog de noticias con vista de listado y de artículo individual, botones para compartir en redes.
-- Formulario de contacto por email (PHPMailer).
-- Sistema de traducciones: textos de interfaz estáticos (`lang/*.php`) y contenido dinámico de la base de datos (tabla `traducciones`).
-- URLs amigables por idioma mediante `mod_rewrite` (p. ej. `/es/producto/trichoderma`, `/en/product/trichoderma`).
+## 📌 Características Principales
 
-## Estructura del proyecto
+- **Catálogo de Insumos y Fabricantes:** Directorio clasificado por categorías, tipos y subtipos de insumos específicos para prácticas de regeneración de suelos.
+- **Arquitectura Multiidioma (i18n):** Soporte de internacionalización para múltiples idiomas (`es`, `en`, `fr`, `ca`, `pt`) mediante routing semántico y plantillas modulares (`lang/`).
+- **Sistema Automatizado de Suscripciones (Cron Job):** Script en segundo plano (`cron_renovaciones.php`) que audita el vencimiento de los planes de prueba y suscripciones de los fabricantes, notificando automáticamente mediante **PHPMailer** con avisos preventivos a 30 días de la expiración.
+- **Sección de Noticias y Blog:** Módulo de artículos informativos y novedades del sector con opciones para compartir contenido por correo.
+- **Despliegue Continuo Automatizado:** Flujo de actualización en servidor Linux mediante script Bash (`update.sh`) con gestión de ramas Git, recreación segura de esquemas y ajuste estricto de permisos `www-data`.
 
-```
-├── index.php              # Página principal: listado de fabricantes + contacto
-├── fabricante.php         # Ficha de fabricante y sus productos
-├── producto.php           # Ficha de producto (specs + microorganismos)
-├── blog.php               # Listado de noticias y vista de artículo
-├── nav.php                # Cabecera / menú de navegación
-├── footer.php             # Pie de página
-├── i18n.php               # Lógica de idiomas, helpers __t(), __url(), __asset_url(), __tdb()
-├── db_connection.php      # Conexión a MySQL (mysqli)
-├── style.css              # Estilos generales del sitio
-├── schema.sql             # Estructura + datos de ejemplo de la base de datos
-├── cron_renovaciones.php  # Cron para renovaciones
-├── .htaccess              # Reglas de reescritura de URL (Apache)
-├── manufacturer.php       # Alias EN -> fabricante.php
-├── fabricant.php          # Alias FR/CA -> fabricante.php
-├── product.php            # Alias EN -> producto.php (si existe)
-├── produto.php            # Alias PT -> producto.php
-├── produit.php            # Alias FR -> producto.php
-├── producte.php           # Alias CA -> producto.php
-└── noticias.php / nouvelles.php / noticies.php / news.php  # Alias de blog.php (si existen)
-```
+---
 
-Los alias por idioma solo cargan el archivo canónico correspondiente (`fabricante.php`, `producto.php`, `blog.php`); el idioma real se determina por parámetro `lang` o por la ruta reescrita.
+## 🛠️ Tecnologías Utilizadas
 
-## Requisitos
+- **Backend:** PHP 8.x (Programación procedimental/modular estructurada)
+- **Base de Datos:** MariaDB / MySQL (Restricciones de claves foráneas, índices optimizados y soporte UTF-8 mb4)
+- **Servicio de Correo:** PHPMailer
+- **Servidor Web:** Nginx / Apache (`.htaccess` con reescritura de URLs amigables)
+- **Entorno de Servidor:** Ubuntu Server (Despliegues en producción y automatización con Cron)
+- **Frontend:** HTML5 semántico, CSS3 modular (`style.css`), diseño responsivo
 
-- PHP 8.1+ con extensión `mysqli`
-- MySQL / MariaDB
-- Servidor Apache con `mod_rewrite` habilitado (o Nginx, ver guía de despliegue) para las URLs amigables
-- [PHPMailer](https://github.com/PHPMailer/PHPMailer) para el envío del formulario de contacto
+---
 
-## Idiomas y URLs
+## 📁 Estructura del Proyecto
 
-- Idiomas soportados: `es`, `en`, `pt`, `fr`, `ca`.
-- Las rutas de fabricante/producto/blog se traducen automáticamente por idioma (ej. `fabricante` → `manufacturer` en inglés, `fabricant` en francés/catalán).
-- El idioma activo se guarda en sesión y en cookie (`user_lang`, 30 días) al usar `?lang=xx` o el selector de idioma.
-- Los textos de interfaz se gestionan con `__t('clave', 'valor por defecto')` y los ficheros `lang/{idioma}.php`.
-- El contenido dinámico (nombres, descripciones, etc.) se traduce con `__tdb()` contra la tabla `traducciones`.
+```text
+├── cron_renovaciones.php   # Tarea programada para control de vencimientos y alertas
+├── db_connection.php       # Manejo de conexión a la base de datos
+├── config.example.php      # Plantilla de credenciales y variables de entorno
+├── i18n.php                # Motor de internacionalización y detección de idioma
+├── lang/                   # Diccionarios y traducciones por idioma
+├── PHPMailer/              # Librería para envío de correos transaccionales
+├── blog.php / news.php     # Vistas y lógica del módulo de noticias
+├── fabricante.php          # Detalle y catálogo filtrado por fabricante
+├── producto.php            # Ficha técnica y clasificación de insumos
+├── media/                  # Recursos gráficos y logotipos de empresas
+├── .gitignore              # Exclusión de datos sensibles y archivos de entorno
+└── update.sh               # Script de despliegue y sincronización en producción
+
+## 👤 Autor
+Enrique Santisteban Fernández
