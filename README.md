@@ -40,6 +40,7 @@ Plataforma web dinámica desarrollada en **PHP nativo y MariaDB/MySQL** diseñad
 ├── media/                  # Recursos gráficos y logotipos de empresas
 ├── .gitignore              # Exclusión de datos sensibles y archivos de entorno
 └── update.sh               # Script de despliegue y sincronización en producción
+```
 
 ## 👤 Autor
 Enrique Santisteban Fernández
