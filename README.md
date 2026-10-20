@@ -20,17 +20,18 @@ Catálogo web en PHP + MySQL de fabricantes e insumos biológicos para agricultu
 ├── blog.php               # Listado de noticias y vista de artículo
 ├── nav.php                # Cabecera / menú de navegación
 ├── footer.php             # Pie de página
-├── i18n.php                # Lógica de idiomas, helpers __t(), __url(), __asset_url(), __tdb()
+├── i18n.php               # Lógica de idiomas, helpers __t(), __url(), __asset_url(), __tdb()
 ├── db_connection.php      # Conexión a MySQL (mysqli)
-├── style.css               # Estilos generales del sitio
-├── schema.sql              # Estructura + datos de ejemplo de la base de datos
-├── .htaccess                # Reglas de reescritura de URL (Apache)
-├── manufacturer.php        # Alias EN -> fabricante.php
-├── fabricant.php           # Alias FR/CA -> fabricante.php
-├── product.php              # Alias EN -> producto.php (si existe)
-├── produto.php              # Alias PT -> producto.php
-├── produit.php              # Alias FR -> producto.php
-├── producte.php             # Alias CA -> producto.php
+├── style.css              # Estilos generales del sitio
+├── schema.sql             # Estructura + datos de ejemplo de la base de datos
+├── cron_renovaciones.php  # Cron para renovaciones
+├── .htaccess              # Reglas de reescritura de URL (Apache)
+├── manufacturer.php       # Alias EN -> fabricante.php
+├── fabricant.php          # Alias FR/CA -> fabricante.php
+├── product.php            # Alias EN -> producto.php (si existe)
+├── produto.php            # Alias PT -> producto.php
+├── produit.php            # Alias FR -> producto.php
+├── producte.php           # Alias CA -> producto.php
 └── noticias.php / nouvelles.php / noticies.php / news.php  # Alias de blog.php (si existen)
 ```
 
